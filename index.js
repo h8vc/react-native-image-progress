@@ -45,10 +45,13 @@ export const createImageProgress = ImageComponent =>
         loading: false,
         progress: 0,
         thresholdReached: !props.threshold,
+        height:100,
+        
       };
     }
 
     componentDidMount() {
+      Image.getSize(this.props.source.uri,(width,height)=> {this.setNativeProps({style:{height:((WIDTH-40)*height)/width}})});
       if (this.props.threshold) {
         this.thresholdTimer = setTimeout(() => {
           this.setState({ thresholdReached: true });
